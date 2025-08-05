@@ -5,8 +5,22 @@ console.log("Environment:", import.meta.env.MODE);
 console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
 console.log("PROD mode:", import.meta.env.PROD);
 
-const API_URL = import.meta.env.VITE_API_URL || 
-    (import.meta.env.PROD ? "https://product-backend-xxv0.onrender.com/api" : "/api");
+// More explicit API URL handling
+let API_URL;
+if (import.meta.env.VITE_API_URL) {
+    // Use the environment variable if it exists
+    API_URL = import.meta.env.VITE_API_URL;
+    // Ensure it ends with /api if it doesn't already
+    if (!API_URL.endsWith('/api')) {
+        API_URL += '/api';
+    }
+} else if (import.meta.env.PROD) {
+    // Production fallback
+    API_URL = "https://product-backend-xxv0.onrender.com/api";
+} else {
+    // Development fallback
+    API_URL = "/api";
+}
 
 console.log("Final API_URL:", API_URL);
 
