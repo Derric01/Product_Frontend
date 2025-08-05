@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
-const API_URL = import.meta.env.VITE_API_URL || "/api";
+const API_URL = import.meta.env.VITE_API_URL || 
+    (import.meta.env.PROD ? "https://product-backend-xxv0.onrender.com/api" : "/api");
 
 export const useProductStore = create((set) => ({
     products: [],
