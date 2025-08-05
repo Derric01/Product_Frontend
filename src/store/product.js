@@ -1,7 +1,14 @@
 import { create } from "zustand";
 
+// Debug: Log environment info
+console.log("Environment:", import.meta.env.MODE);
+console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+console.log("PROD mode:", import.meta.env.PROD);
+
 const API_URL = import.meta.env.VITE_API_URL || 
     (import.meta.env.PROD ? "https://product-backend-xxv0.onrender.com/api" : "/api");
+
+console.log("Final API_URL:", API_URL);
 
 export const useProductStore = create((set) => ({
     products: [],
